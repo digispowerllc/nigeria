@@ -4,15 +4,19 @@
 
 	let year = new Date().getFullYear();
 
-	export let stateCalls = 2300;
-	export let lgaCalls = 1500;
+	export let stateCalls = 0;
+	export let lgaCalls = 0;
+	export let puCalls = 0;
+	export let wardCalls = 0;
 
 	async function fetchStats() {
 		try {
-			const res = await fetch('/api/v1/stats'); // You should create this API endpoint!
+			const res = await fetch('/api/v1/stats');
 			const data = await res.json();
 			stateCalls = data.stateCalls;
 			lgaCalls = data.lgaCalls;
+			puCalls = data.puCalls;
+			wardCalls = data.wardCalls;
 		} catch (err) {
 			console.error('Stats fetch error:', err);
 		}
@@ -29,10 +33,8 @@
 <section
 	class="flex min-h-screen flex-col items-center justify-center bg-white px-4 text-center sm:px-6"
 >
-	<img src="/logo.png" alt="I3 Hub Logo" class="fade-up mb-6 h-16 sm:h-20" />
-	<h1 class="fade-up mb-4 text-3xl leading-tight font-extrabold text-blue-600 sm:text-5xl">
-		API Platform
-	</h1>
+	<img src="/logo.png" alt="I3 Hub Logo" class="fade-up mb-20 h-16 sm:h-20" />
+	<h1 class="fade-up mb-8 text-3xl font-extrabold text-gray-500 sm:text-4xl">API Platform</h1>
 	<p class="fade-up mb-6 max-w-md text-base text-gray-700 sm:max-w-2xl sm:text-xl">
 		Open Access. Empowered Communities. Innovation-Driven.
 	</p>
@@ -45,23 +47,38 @@
 </section>
 
 <!-- API Call Stats Section -->
-
-<section class="py-20 text-center text-gray-500 bg-white">
-  <h2 class="fade-up mb-8 text-3xl font-extrabold text-gray-500 sm:text-4xl">APIs in Number</h2>
-  <div class="mx-auto grid max-w-2xl grid-cols-1 gap-6 px-4 sm:grid-cols-2 sm:px-0">
-    <div class="fade-up transform rounded-xl bg-white p-6 shadow-lg transition duration-300 hover:scale-105">
-      <CircularProgress value={stateCalls} max={3000} label="States Endpoint" color="#2563eb" />
-    </div>
-    <div class="fade-up transform rounded-xl bg-white p-6 shadow-lg transition duration-300 hover:scale-105">
-      <CircularProgress value={lgaCalls} max={3000} label="LGA Endpoint" color="#16a34a" />
-    </div>
-  </div>
+<section class="bg-white py-20 text-center text-gray-500">
+	<h2 class="fade-up mb-8 text-3xl font-extrabold text-gray-500 sm:text-4xl">APIs in Number</h2>
+	<div class="mx-auto grid max-w-4xl grid-cols-1 gap-6 px-4 sm:grid-cols-2 sm:px-0 lg:grid-cols-4">
+		<div
+			class="fade-up transform rounded-xl bg-white p-6 shadow-lg transition duration-300 hover:scale-105"
+		>
+			<CircularProgress value={stateCalls} label="States Endpoint" color="#2563eb" />
+		</div>
+		<div
+			class="fade-up transform rounded-xl bg-white p-6 shadow-lg transition duration-300 hover:scale-105"
+		>
+			<CircularProgress value={lgaCalls} label="LGA Endpoint" color="#16a34a" />
+		</div>
+		<div
+			class="fade-up transform rounded-xl bg-white p-6 shadow-lg transition duration-300 hover:scale-105"
+		>
+			<CircularProgress value={puCalls} label="Polling Units" color="#dc2626" />
+		</div>
+		<div
+			class="fade-up transform rounded-xl bg-white p-6 shadow-lg transition duration-300 hover:scale-105"
+		>
+			<CircularProgress value={wardCalls} label="Wards Endpoint" color="#9333ea" />
+		</div>
+	</div>
 </section>
 
 <!-- Features Section -->
-<section class="bg-white py-16 text-center sm:py-20 mt-28 select:none text-gray-500">
+<section class="select:none mt-28 bg-white py-16 text-center text-gray-500 sm:py-20">
 	<div class="mx-auto max-w-6xl px-4">
-		<h2 class="fade-up mb-8 text-3xl font-extrabold text-gray-500 sm:text-4xl">Why Choose I3 APIs?</h2>
+		<h2 class="fade-up mb-8 text-3xl font-extrabold text-gray-500 sm:text-4xl">
+			Why Choose I3 APIs?
+		</h2>
 		<div class="grid grid-cols-1 gap-8 text-left sm:grid-cols-2 md:grid-cols-3">
 			<div class="fade-up">
 				<h3 class="mb-2 text-lg font-semibold text-yellow-500">No Signup Barriers</h3>
@@ -88,7 +105,9 @@
 <!-- Call To Action -->
 <section class="bg-gray-50 py-16 text-center sm:py-20">
 	<div class="mx-auto max-w-xl px-4 sm:px-6">
-		<h2 class="fade-up mb-8 text-3xl font-extrabold text-gray-500 sm:text-4xl">Get Started Instantly</h2>
+		<h2 class="fade-up mb-8 text-3xl font-extrabold text-gray-500 sm:text-4xl">
+			Get Started Instantly
+		</h2>
 		<p class="mb-6 text-base text-gray-700 sm:text-lg">
 			No credit card. No paywall. Just powerful API access from the start.
 		</p>
