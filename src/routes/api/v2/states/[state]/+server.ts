@@ -1,13 +1,18 @@
 import type { RequestHandler } from '@sveltejs/kit';
 import { states, lga, capitals } from '$lib/data/v1/nigeria';
+import { incrementApiCall } from '$lib/server/db/utils/apiStats';
+import { getApiCallStats } from '$lib/server/db/utils/getApiCallStats';
 
 export const GET: RequestHandler = async ({ params }) => {
     const raw = params.state?.trim().toLowerCase();
 
 
-   
+    const stats = await getApiCallStats();
+    console.table(stats);
+
     if (!raw) {
-              return new Response(
+        await incrementApiCall('invalid');
+        return new Response(
             JSON.stringify({ error: 'No state, LGA, or capital provided.' }, null, 2),
             {
                 status: 400,
@@ -19,7 +24,8 @@ export const GET: RequestHandler = async ({ params }) => {
     // Match a state
     const matchState = states.find((s) => s.toLowerCase() === raw);
     if (matchState) {
-               return new Response(
+        await incrementApiCall('state');
+        return new Response(
             JSON.stringify(
                 {
                     type: 'state',
@@ -38,7 +44,8 @@ export const GET: RequestHandler = async ({ params }) => {
     const matchCapital = Object.entries(capitals).find(([, capital]) => capital.toLowerCase() === raw);
     if (matchCapital) {
         const [state] = matchCapital;
-              return new Response(
+        await incrementApiCall('capital');
+        return new Response(
             JSON.stringify(
                 {
                     type: 'capital',
@@ -58,7 +65,8 @@ export const GET: RequestHandler = async ({ params }) => {
     for (const [state, lgaList] of Object.entries(lga)) {
         const found = lgaList.find((l) => l.toLowerCase() === raw);
         if (found) {
-                      return new Response(
+            await incrementApiCall('lga');
+            return new Response(
                 JSON.stringify(
                     {
                         type: 'lga',
@@ -75,7 +83,8 @@ export const GET: RequestHandler = async ({ params }) => {
     }
 
     // No match found
-      return new Response(
+    await incrementApiCall('unknown');
+    return new Response(
         JSON.stringify({ error: `${raw} is not a recognized Nigerian state, capital or LGA.` }, null, 2),
         {
             status: 404,
