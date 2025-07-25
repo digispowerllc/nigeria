@@ -40,7 +40,7 @@
 		Open Access. Empowered Communities. Innovation-Driven.
 	</p>
 	<a
-		href="/docs"
+		href="/"
 		class="cta-btn fade-up inline-flex items-center rounded-lg px-5 py-2 font-semibold text-white shadow-lg transition sm:px-6 sm:py-3"
 	>
 		Read the Docs
@@ -113,7 +113,7 @@
 			No credit card. No paywall. Just powerful API access from the start.
 		</p>
 		<a
-			href="/explore"
+			href="/"
 			class="cta-btn inline-flex items-center rounded-lg px-5 py-2 font-semibold text-white shadow-lg transition sm:px-6 sm:py-3"
 		>
 			Start Exploring
