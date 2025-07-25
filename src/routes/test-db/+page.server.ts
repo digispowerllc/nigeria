@@ -1,5 +1,4 @@
-// File: src/routes/test-db/+server.ts
-import { db } from '$lib/server/db';
+import { db } from '$lib/server/db/db';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async () => {
@@ -13,8 +12,7 @@ export const load: PageServerLoad = async () => {
         };
     } catch (error: unknown) {
         console.error('❌ DB connection failed:', error);
-        const message =
-            error instanceof Error ? error.message : 'Unknown error occurred';
+        const message = error instanceof Error ? error.message : 'Unknown error occurred';
 
         return {
             status: 'error',

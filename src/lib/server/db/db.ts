@@ -1,9 +1,9 @@
 import { Pool } from 'pg';
 import fs from 'fs';
 import path from 'path';
-import dotenv from 'dotenv';
-
-dotenv.config();
+import { env } from '$env/dynamic/private';
+import { drizzle } from 'drizzle-orm/node-postgres';
+import * as schema from './schema'; // <-- Make sure this path is correct
 
 const {
   HOST,
@@ -12,7 +12,7 @@ const {
   USER,
   PASSWORD,
   CONNECTION_LIMIT
-} = process.env;
+} = env;
 
 if (!PASSWORD || !HOST || !DATABASE_NAME || !USER) {
   throw new Error('❌ Missing required database environment variables');
@@ -33,15 +33,19 @@ try {
   sslConfig = false;
 }
 
+// Native pg Pool
 export const db = new Pool({
   host: HOST,
-  port: Number(PORT) || 5432,
+  port: Number(PORT) || 27233,
   database: DATABASE_NAME,
   user: USER,
   password: PASSWORD,
   ssl: sslConfig,
   max: Number(CONNECTION_LIMIT) || 20
 });
+
+// Drizzle ORM binding using the Pool
+export const drizzleDb = drizzle(db, { schema });
 
 export async function connect() {
   try {

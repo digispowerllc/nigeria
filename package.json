@@ -40,6 +40,8 @@
 		"@types/dotenv": "^6.1.1",
 		"@types/pg": "^8.15.4",
 		"dotenv": "^17.2.1",
+		"drizzle-kit": "^0.31.4",
+		"drizzle-orm": "^0.44.3",
 		"pg": "^8.16.3"
 	}
 }

@@ -1,0 +1,1 @@
+ALTER TABLE "api_calls" ADD CONSTRAINT "api_calls_type_unique" UNIQUE("type");

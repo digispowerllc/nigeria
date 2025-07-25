@@ -1,4 +1,4 @@
-<!-- src/routes/test-db/+page.svelte -->
+<!-- src/routes/test-db-->
 <script lang="ts">
 	export let data: {
 		status: string;

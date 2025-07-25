@@ -13,10 +13,10 @@
 		try {
 			const res = await fetch('/api/v1/stats');
 			const data = await res.json();
-			stateCalls = data.stateCalls;
-			lgaCalls = data.lgaCalls;
-			puCalls = data.puCalls;
-			wardCalls = data.wardCalls;
+			stateCalls = data.stateCalls || 0;
+			lgaCalls = data.lgaCalls || 0;
+			puCalls = data.puCalls || 0;
+			wardCalls = data.wardCalls || 0;
 		} catch (err) {
 			console.error('Stats fetch error:', err);
 		}
@@ -28,11 +28,12 @@
 		return () => clearInterval(interval);
 	});
 </script>
+
 <head>
 	<title>I3 Hub API Platform</title>
 	<meta name="description" content="Open Access. Empowered Communities. Innovation-Driven." />
 	<link rel="icon" href="/favicon.ico" />
-	<link rel="stylesheet" href="/global.css" />
+	<!-- <link rel="stylesheet" href="/global.css" /> -->
 </head>
 
 <!-- Hero Section -->
