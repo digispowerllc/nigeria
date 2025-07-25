@@ -1,32 +1,25 @@
-
-import { db, schema } from '$lib/server/db';
-import { inArray } from 'drizzle-orm';
-
 import { json } from '@sveltejs/kit';
 
 export async function GET() {
-    const rows = await db
-        .select()
-        .from(schema.apiCalls)
-        .where(inArray(schema.apiCalls.type, ['states', 'capitals', 'lga', 'pu', 'ward']));
+    // Generate dummy random values for stats
+    const stateCalls = Math.floor(Math.random() * 1000);
+    const lgaCalls = Math.floor(Math.random() * 1000);
+    const puCalls = Math.floor(Math.random() * 1000);
+    const wardCalls = Math.floor(Math.random() * 1000);
 
-    // Map results to key-value pairs
-    const results: Record<string, number> = {};
-    for (const row of rows) {
-        if (row.type && row.count !== undefined) {
-            results[row.type] = row.count ?? 0;
-        }
-    }
-
-    console.log('API Call Stats:', results);
-
+    console.log(`Generated stats:
+    State Calls: ${stateCalls}
+    LGA Calls: ${lgaCalls}
+    PU Calls: ${puCalls}
+    Ward Calls: ${wardCalls}`);
+    
     return json({
-        stateCalls: results['states'] ?? 0,
-        lgaCalls: results['lga'] ?? 0,
-        puCalls: results['pu'] ?? 0,
-        wardCalls: results['ward'] ?? 0
+        stateCalls,
+        lgaCalls,
+        puCalls,
+        wardCalls
     });
-
 }
+
 export const prerender = true;
 export const trailingSlash = 'always';

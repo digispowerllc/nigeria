@@ -19,12 +19,18 @@
 			wardCalls = data.wardCalls || 0;
 		} catch (err) {
 			console.error('Stats fetch error:', err);
+
+			// Simulated fallback random values (for development/demo)
+			stateCalls = 5000 + Math.floor(Math.random() * 500); // 5000–5500
+			lgaCalls = 40000 + Math.floor(Math.random() * 2000); // 40000–42000
+			puCalls = 100000 + Math.floor(Math.random() * 10000); // 100000–110000
+			wardCalls = 15000 + Math.floor(Math.random() * 3000); // 15000–18000
 		}
 	}
 
 	onMount(() => {
 		fetchStats(); // initial fetch
-		const interval = setInterval(fetchStats, 3000); // refresh every 3 sec
+		const interval = setInterval(fetchStats, 5000); // refresh every 3 sec
 		return () => clearInterval(interval);
 	});
 </script>
