@@ -56,7 +56,6 @@ export const lga: Record<string, string[]> = {
         "Isiala-Ngwa North",
         "Isiala-Ngwa South",
         "Isuikwato",
-        "Obi Nwa",
         "Ohafia",
         "Osisioma",
         "Ngwa",
@@ -65,7 +64,7 @@ export const lga: Record<string, string[]> = {
         "Ukwa West",
         "Umuahia North",
         "Umuahia South",
-        "Umu-Neochi"
+        "Umunneochi"
     ],
     "Adamawa": [
         "Demsa",

@@ -13,34 +13,22 @@
 		try {
 			const res = await fetch('/api/v1/stats');
 			const data = await res.json();
+
 			stateCalls = data.stateCalls || 0;
 			lgaCalls = data.lgaCalls || 0;
 			puCalls = data.puCalls || 0;
 			wardCalls = data.wardCalls || 0;
 		} catch (err) {
 			console.error('Stats fetch error:', err);
-
-			// Simulated fallback random values (for development/demo)
-			stateCalls = 5000 + Math.floor(Math.random() * 500); // 5000–5500
-			lgaCalls = 40000 + Math.floor(Math.random() * 2000); // 40000–42000
-			puCalls = 100000 + Math.floor(Math.random() * 10000); // 100000–110000
-			wardCalls = 15000 + Math.floor(Math.random() * 3000); // 15000–18000
 		}
 	}
 
 	onMount(() => {
-		fetchStats(); // initial fetch
-		const interval = setInterval(fetchStats, 5000); // refresh every 3 sec
+		fetchStats(); // Initial fetch
+		const interval = setInterval(fetchStats, 3000); // Auto-refresh every 3 sec
 		return () => clearInterval(interval);
 	});
 </script>
-
-<head>
-	<title>I3 Hub API Platform</title>
-	<meta name="description" content="Open Access. Empowered Communities. Innovation-Driven." />
-	<link rel="icon" href="/favicon.ico" />
-	<!-- <link rel="stylesheet" href="/global.css" /> -->
-</head>
 
 <!-- Hero Section -->
 <section

@@ -1,18 +1,19 @@
+// src/routes/api/v1/stats/+server.ts
 import { json } from '@sveltejs/kit';
 
 export async function GET() {
-    // Generate dummy random values for stats
-    const stateCalls = Math.floor(Math.random() * 1000);
-    const lgaCalls = Math.floor(Math.random() * 1000);
-    const puCalls = Math.floor(Math.random() * 1000);
-    const wardCalls = Math.floor(Math.random() * 1000);
+    // Simulated growing fake values
+    const stateCalls = 5000 + Math.floor(Math.random() * 500);   // 5000–5499
+    const lgaCalls = 40000 + Math.floor(Math.random() * 1500);   // 40000–41499
+    const puCalls = 120000 + Math.floor(Math.random() * 10000);  // 120000–129999
+    const wardCalls = 18000 + Math.floor(Math.random() * 2000);  // 18000–19999
 
-    console.log(`Generated stats:
-    State Calls: ${stateCalls}
-    LGA Calls: ${lgaCalls}
-    PU Calls: ${puCalls}
-    Ward Calls: ${wardCalls}`);
-    
+    console.log(`Generated dummy stats:
+State Calls: ${stateCalls}
+LGA Calls: ${lgaCalls}
+PU Calls: ${puCalls}
+Ward Calls: ${wardCalls}`);
+
     return json({
         stateCalls,
         lgaCalls,
@@ -20,6 +21,3 @@ export async function GET() {
         wardCalls
     });
 }
-
-export const prerender = true;
-export const trailingSlash = 'always';
