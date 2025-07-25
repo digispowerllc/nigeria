@@ -28,5 +28,4 @@ export async function GET() {
     });
 
 }
-export const prerender = false;
-export const trailingSlash = 'always';
+

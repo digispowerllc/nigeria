@@ -13,6 +13,5 @@ export const GET = async () => {
         states: states.sort()
     });
 };
-export const prerender = false;
-export const trailingSlash = 'always';
+
 // This endpoint returns a list of all states in Nigeria.
