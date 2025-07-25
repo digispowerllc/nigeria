@@ -1,18 +1,20 @@
 import type { RequestHandler } from '@sveltejs/kit';
 import { states, lga, capitals } from '$lib/data/v1/nigeria';
 
+const corsHeaders = {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*', // Change '*' to a specific domain if needed
+    'Access-Control-Allow-Methods': 'GET, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type'
+};
+
 export const GET: RequestHandler = async ({ params }) => {
     const raw = params.state?.trim().toLowerCase();
-
-
 
     if (!raw) {
         return new Response(
             JSON.stringify({ error: 'No state, LGA, or capital provided.' }, null, 2),
-            {
-                status: 400,
-                headers: { 'Content-Type': 'application/json' }
-            }
+            { status: 400, headers: corsHeaders }
         );
     }
 
@@ -32,7 +34,7 @@ export const GET: RequestHandler = async ({ params }) => {
                 null,
                 2
             ),
-            { headers: { 'Content-Type': 'application/json' } }
+            { headers: corsHeaders }
         );
     }
 
@@ -52,7 +54,7 @@ export const GET: RequestHandler = async ({ params }) => {
                 null,
                 2
             ),
-            { headers: { 'Content-Type': 'application/json' } }
+            { headers: corsHeaders }
         );
     }
 
@@ -71,7 +73,7 @@ export const GET: RequestHandler = async ({ params }) => {
                     null,
                     2
                 ),
-                { headers: { 'Content-Type': 'application/json' } }
+                { headers: corsHeaders }
             );
         }
     }
@@ -79,11 +81,16 @@ export const GET: RequestHandler = async ({ params }) => {
     // No match found
     return new Response(
         JSON.stringify({ error: `${raw} is not a recognized Nigerian state, capital or LGA.` }, null, 2),
-        {
-            status: 404,
-            headers: { 'Content-Type': 'application/json' }
-        }
+        { status: 404, headers: corsHeaders }
     );
+};
+
+// Handle OPTIONS preflight request for CORS
+export const OPTIONS: RequestHandler = async () => {
+    return new Response(null, {
+        status: 204,
+        headers: corsHeaders
+    });
 };
 
 export const prerender = false;
