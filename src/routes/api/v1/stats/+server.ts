@@ -8,11 +8,11 @@ export async function GET() {
     const puCalls = 120000 + Math.floor(Math.random() * 10000);  // 120000–129999
     const wardCalls = 18000 + Math.floor(Math.random() * 2000);  // 18000–19999
 
-    console.log(`Generated dummy stats:
-State Calls: ${stateCalls}
-LGA Calls: ${lgaCalls}
-PU Calls: ${puCalls}
-Ward Calls: ${wardCalls}`);
+    //     console.log(`Generated dummy stats:
+    // State Calls: ${stateCalls}
+    // LGA Calls: ${lgaCalls}
+    // PU Calls: ${puCalls}
+    // Ward Calls: ${wardCalls}`);
 
     return json({
         stateCalls,
