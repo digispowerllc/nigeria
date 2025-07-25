@@ -86,5 +86,5 @@ export const GET: RequestHandler = async ({ params }) => {
     );
 };
 
-export const prerender = true;
+export const prerender = false;
 export const trailingSlash = 'always';

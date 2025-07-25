@@ -4,7 +4,7 @@ import { states } from '$lib/data/v1/nigeria';
 import { incrementApiCall } from '$lib/server/db/utils/apiStats';
 
 export const GET = async () => {
-       await incrementApiCall('state');
+    await incrementApiCall('state');
     console.log(`✅ API call for states endpoint was successful.`);
     return json({
         type: 'State',
@@ -13,6 +13,6 @@ export const GET = async () => {
         states: states.sort()
     });
 };
-export const prerender = true;
+export const prerender = false;
 export const trailingSlash = 'always';
 // This endpoint returns a list of all states in Nigeria.
