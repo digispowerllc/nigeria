@@ -106,7 +106,7 @@ export const OPTIONS = () =>
         headers: corsHeaders()
     });
 
-// 🛡️ CORS headers
+// 🛡️ CORS Headers
 function corsHeaders() {
     return {
         'Content-Type': 'application/json',
