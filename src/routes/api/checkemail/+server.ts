@@ -1,0 +1,19 @@
+// src/routes/api/checkemail/+server.ts
+import { json } from '@sveltejs/kit';
+import { getDisposableDomainSet } from '$lib/utils/disposableDomains';
+
+export async function GET({ url }) {
+  const email = url.searchParams.get('email');
+
+  if (!email || !email.includes('@')) {
+    return json({ error: 'Invalid email format' }, { status: 400 });
+  }
+
+  const domain = email.split('@')[1].toLowerCase();
+  const isDisposable = getDisposableDomainSet().has(domain);
+
+  return json({
+    email,
+    disposable: isDisposable
+  });
+}
