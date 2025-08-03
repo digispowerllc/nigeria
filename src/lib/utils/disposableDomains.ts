@@ -1,5 +1,5 @@
 // src/lib/utils/disposableDomains.ts
-import { disposableDomains } from '$lib/data/disposableDomains/disposable_domains';
+import { disposableDomains } from '$lib/data/disposableEmail/disposable_domains';
 
 let domainSet: Set<string> | null = null;
 
