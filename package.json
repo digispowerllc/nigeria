@@ -42,6 +42,7 @@
 		"dotenv": "^17.2.1",
 		"drizzle-kit": "^0.31.4",
 		"drizzle-orm": "^0.44.3",
+		"node-fetch": "^3.3.2",
 		"pg": "^8.16.3"
 	}
 }
