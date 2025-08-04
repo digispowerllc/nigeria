@@ -30,5 +30,7 @@ drizzle/migrations
 
 # Disposable email backup
 src/lib/data/disposableEmail/disposable_backups/
+
 # Ignore local utility scripts
 scripts/
+scripts/*.ts
