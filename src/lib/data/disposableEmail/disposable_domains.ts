@@ -1,4 +1,4 @@
-export const disposableDomains = [
+export const disposableDomains = new Set([
   "0-180.com",
   "0-30-24.com",
   "0-420.com",
@@ -121569,4 +121569,4 @@ export const disposableDomains = [
   "zzz98.xyz",
   "zzzpush.icu",
   "zzzz1717.com"
-];
+]);
