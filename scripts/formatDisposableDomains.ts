@@ -1,12 +1,19 @@
-import { readFileSync, writeFileSync, copyFileSync } from 'fs';
+import { readFileSync, writeFileSync, copyFileSync, mkdirSync, existsSync } from 'fs';
 import { resolve, dirname, basename } from 'path';
 
 // Paths
 const inputPath = resolve('src/lib/data/disposableEmail/disposable_domains.ts');
-const backupPath = resolve(
-  dirname(inputPath),
-  `${basename(inputPath, '.ts')}.backup.${Date.now()}.ts`
-);
+const backupDir = resolve(dirname(inputPath), 'disposable_backups');
+
+// Ensure backup folder exists
+if (!existsSync(backupDir)) {
+  mkdirSync(backupDir);
+  console.log(`📁 Created backup folder: ${backupDir}`);
+}
+
+// Create timestamped backup file
+const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+const backupPath = resolve(backupDir, `${basename(inputPath, '.ts')}.backup.${timestamp}.ts`);
 
 // Step 1: Create a backup
 copyFileSync(inputPath, backupPath);
@@ -27,7 +34,7 @@ const domainListRaw = match[1];
 // Step 4: Parse and clean domains
 const rawDomains = domainListRaw
   .split(',')
-  .map(domain => domain.trim().replace(/^["']|["']$/g, '')) // remove quotes
+  .map(domain => domain.trim().replace(/^["']|["']$/g, ''))
   .filter(domain => domain.length > 0);
 
 // Step 5: Sort and deduplicate
